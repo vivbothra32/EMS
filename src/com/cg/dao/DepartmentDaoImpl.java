@@ -1,7 +1,7 @@
 package com.cg.dao;
 /**
  * @project Employee Maintenance System
- * @author Anurag, Pritam, Ruchi, Vivek, Zeeshan
+ * @author Group2(Anurag, Pritam, Ruchi, Vivek, Zeeshan)
  * @version 1.0
  */
 import java.sql.Connection;

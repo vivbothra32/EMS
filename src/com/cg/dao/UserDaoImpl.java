@@ -1,4 +1,5 @@
 package com.cg.dao;
+
 /**
  * @project Employee Maintenance System
  * @author Anurag, Pritam, Ruchi, Vivek, Zeeshan
@@ -15,7 +16,7 @@ import com.cg.beans.User;
 import oracle.jdbc.driver.OracleDriver;
 
 public class UserDaoImpl implements UserDao {
-	
+
 	private Connection getConnection() throws SQLException {
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		DriverManager.registerDriver(new OracleDriver());
@@ -26,7 +27,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User validateLogin(User user) {
-		
+
 		String sql = "select *  from user_master where userid=?  and username = ? and password=? and usertype = ?";
 		Connection conn = null;
 		User u = null;
@@ -34,12 +35,12 @@ public class UserDaoImpl implements UserDao {
 			conn = getConnection();
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, user.getUserId());
-			
+
 			stmt.setString(2, user.getUserName());
 			stmt.setString(3, user.getPassword());
 			stmt.setString(4, user.getUserType());
 			ResultSet rs = stmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				u = new User();
 				u.setUserId(rs.getString(1));
 				u.setUserName(rs.getString(3));
@@ -47,7 +48,7 @@ public class UserDaoImpl implements UserDao {
 				u.setUserType(rs.getString(4));
 			}
 			return u;
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 
@@ -60,5 +61,4 @@ public class UserDaoImpl implements UserDao {
 				}
 		}
 	}
-
 }

@@ -1,4 +1,5 @@
 package com.cg.cli;
+
 /**
  * @project Employee Maintenance System
  * @author Anurag, Pritam, Ruchi, Vivek, Zeeshan
@@ -38,7 +39,7 @@ public class EMSApplication {
 	private static EmployeeService eservice;
 	private static DepartmentService dservice;
 	private static GradeService gservice;
-	
+
 	/**
 	 * Static block, implements even before the main method
 	 */
@@ -49,9 +50,10 @@ public class EMSApplication {
 		dservice = new DepartmentServiceImpl();
 		gservice = new GradeServiceImpl();
 	}
+
 	/**
 	 * @description main method of Employee Maintenance System Client Interface
-	 * @author Vivek
+	 * @author Group 2.
 	 */
 	public static void main(String[] args) {
 		int userTypeChoice;
@@ -66,16 +68,18 @@ public class EMSApplication {
 			case 1:
 				signIn();
 			case 0:
+				System.out.println("TERMINATED !");
 				System.exit(0);
 			default:
-				System.out.println("Invalid choice entered");
+				System.out.println("Invalid choice entered.\nProvide a valid input.");
 			}
 		} while (true);
 
 	}
+
 	/**
 	 * @description performs the sign in operation when user chooses option 1.
-	 * @author Vivek 
+	 * @author Vivek
 	 */
 	public static void signIn() {
 		System.out.println("==============================================");
@@ -91,14 +95,15 @@ public class EMSApplication {
 		userName = scanner.next();
 		System.out.print("Enter your Password : ");
 		password = scanner.next();
-		
-		//Checking the user type entered. Shopuld be either Admin/Employee
+
+		// Checking the user type entered. Should be either Admin/Employee
 		while (true) {
 			System.out.print("Enter user type : Admin/Employee ");
 			userType = scanner.next();
-			
-			// ignore case will be better here cause I would like to type like EmPlOyEe Mah lyf mah rulezz :p
-			
+
+			// ignore case will be better here because I would like to type like EmPlOyEe
+			// Mah lyf mah rulezz :p
+
 			if (userType.equalsIgnoreCase("Admin") || userType.equalsIgnoreCase("Employee")) {
 				break;
 			} else {
@@ -110,10 +115,11 @@ public class EMSApplication {
 		user.setPassword(password);
 		user.setUserName(userName);
 		user.setUserType(userType);
-		
-		/**User object is passed to service method validateUser to check if the user information
-		 *  is present in user_master database table. If user is found, Admin/Employee specific functions 
-		 *  are provided.
+
+		/**
+		 * User object is passed to service method validateUser to check if the user
+		 * information is present in user_master database table. If user is found,
+		 * Admin/Employee specific functions are provided.
 		 */
 		User flag = uservice.validateUser(user);
 		if (flag == null) {
@@ -126,15 +132,16 @@ public class EMSApplication {
 				employeeLogin(flag);
 			}
 		}
-
 	}
 
 	private static void employeeLogin(User flag) {
 		// TODO Auto-generated method stub
 
 	}
+
 	/**
-	 * @description static function adminLogin. Provides the functions specific to Admin type user. 
+	 * @description static function adminLogin. Provides the functions specific to
+	 *              Admin type user.
 	 * @author Vivek
 	 */
 	private static void adminLogin(User flag) {
@@ -149,30 +156,31 @@ public class EMSApplication {
 			choice = scanner.nextInt();
 			switch (choice) {
 			case 1:
-				addEmployee();	//Control shifts to addEmployee function on choosing 1.
+				addEmployee(); // Control shifts to addEmployee function on choosing 1.
 				break;
 			case 2:
-				modifyEmployee();	//Control shifts to modifyEmployee function on choosing 2.
+				modifyEmployee(); // Control shifts to modifyEmployee function on choosing 2.
 				break;
 			case 3:
-				displayEmployee();	//Control shifts to displayEmployee function on choosing 3.
+				displayEmployee(); // Control shifts to displayEmployee function on choosing 3.
 				break;
 			case 0:
-				System.exit(0);	//Exiting the control when ) is entered.
+				System.exit(0); // Exiting the control when ) is entered.
 			default:
-				System.out.println("Invalid choice entered"); //Default message when none of 0 - 3 is entered
+				System.out.println("Invalid choice entered"); // Default message when none of 0 - 3 is entered
 			}
 		} while (true);
 	}
-	
+
 	/**
-	 * @description 1st privilege of Admin type user. Function to modify the employee details.
-	 *  @author Vivek
+	 * @description 1st privilege of Admin type user. Function to modify the
+	 *              employee details.
+	 * @author Vivek
 	 */
 	private static void modifyEmployee() {
 		System.out.println("MODIFYING EXISTING EMPLOYEE DETAILS");
-		String empId="", firstName="", lastName="", maritalStatus = "", homeAddress = "", contactNo = "",
-				gradeDescription = "",  gradeCode = "";
+		String empId = "", firstName = "", lastName = "", maritalStatus = "", homeAddress = "", contactNo = "",
+				gradeDescription = "", gradeCode = "";
 		double basic = 0.0;
 		int deptId = 0;
 
@@ -289,9 +297,9 @@ public class EMSApplication {
 				}
 			} while (flag == false);
 		}
-		
+
 		Employee employee = new Employee();
-		
+
 		employee.setEmpId(empId);
 		employee.setFirstName(firstName);
 		employee.setLastname(lastName);
@@ -306,19 +314,21 @@ public class EMSApplication {
 		employee.setGradeCode(gradeCode);
 		employee.setGradeDescription(gradeDescription);
 		employee.setMgrId(emp.getMgrId());
-		
+
 		String k = eservice.modifyEmployee(employee);
 
 		if (k.equals("")) {
 			System.out.println("Employee details could not be modified in the database.");
 		} else {
-			System.out.println("Employee with id " + emp.getEmpId() + " updated.");
+			System.out.println("Employee id: " + emp.getEmpId() + " updated.");
 		}
 
 	}
+
 	/**
-	 * @description 2nd privilege of Admin type user. Function to add new user details.
-	 *  @author Vivek
+	 * @description 2nd privilege of Admin type user. Function to add new user
+	 *              details.
+	 * @author Vivek
 	 */
 	private static void addEmployee() {
 		Employee employee = new Employee();
@@ -483,8 +493,8 @@ public class EMSApplication {
 				System.out.println("Basic salary is not per the slab specified. Enter again. ");
 				flag = false;
 			}
-		}while(flag == false);
-		
+		} while (flag == false);
+
 		do {
 			do {
 				System.out.print("Enter Manager ID : ");
@@ -526,20 +536,19 @@ public class EMSApplication {
 			System.out.println("Employee with id " + emp.getEmpId() + " added.");
 		}
 	}
+
 	/**
-	 * @description 3rd privilege of Admin type user. Function to display the employee details.
-	 *  @author Vivek
+	 * @description 3rd privilege of Admin type user. Function to display the
+	 *              employee details.
+	 * @author Vivek
 	 */
 	private static void displayEmployee() {
 		List<Employee> employees = eservice.fetchAllEmployees();
 		System.out.println("EMPLOYEE DETAILS :- ");
-		for(Employee emp : employees) {
-			System.out.println("Name\t"+"First Name\t"+"Last Name\t"+"Department\t"+"Grade\t"+"Designation");
-			System.out.println(emp.getEmpId()+"\t"+emp.getFirstName()+"\t"+emp.getLastName()
-					+"\t"+emp.getEmpDeptId()+"\t"+emp.getGradeCode()+"\t"+emp.getGradeDescription());
+		for (Employee emp : employees) {
+			System.out.println("Name\t" + "First Name\t" + "Last Name\t" + "Department\t" + "Grade\t" + "Designation");
+			System.out.println(emp.getEmpId() + "\t" + emp.getFirstName() + "\t" + emp.getLastName() + "\t"
+					+ emp.getEmpDeptId() + "\t" + emp.getGradeCode() + "\t" + emp.getGradeDescription());
 		}
 	}
-
 }
-
-

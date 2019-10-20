@@ -1,4 +1,5 @@
 package com.cg.service;
+
 /**
  * @project Employee Maintenance System
  * @author Anurag, Pritam, Ruchi, Vivek, Zeeshan
@@ -38,6 +39,4 @@ public interface EmployeeService {
 	String modifyEmployee(Employee employee);
 
 	List<Employee> fetchAllEmployees();
-	
-
 }

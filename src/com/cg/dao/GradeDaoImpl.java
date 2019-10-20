@@ -1,4 +1,5 @@
 package com.cg.dao;
+
 /**
  * @project Employee Maintenance System
  * @author Anurag, Pritam, Ruchi, Vivek, Zeeshan
@@ -24,6 +25,7 @@ public class GradeDaoImpl implements GradeDao {
 		return conn;
 
 	}
+
 	@Override
 	public Grade fetchGrade(String grade) {
 		String sql = "Select * from Grade_Master where Grade_Code = ?";
@@ -34,7 +36,7 @@ public class GradeDaoImpl implements GradeDao {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, grade);
 			ResultSet rs = stmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				g = new Grade();
 				g.setCode(rs.getString(1));
 				g.setDescription(rs.getString(2));
@@ -42,11 +44,10 @@ public class GradeDaoImpl implements GradeDao {
 				g.setMaxSalary(rs.getDouble(4));
 			}
 			return g;
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
-		}
-		finally {
+		} finally {
 			if (conn != null)
 				try {
 					conn.close();
@@ -55,6 +56,4 @@ public class GradeDaoImpl implements GradeDao {
 				}
 		}
 	}
-
 }
-

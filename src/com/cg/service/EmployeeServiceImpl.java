@@ -1,4 +1,5 @@
 package com.cg.service;
+
 /**
  * @project Employee Maintenance System
  * @author Anurag, Pritam, Ruchi, Vivek, Zeeshan
@@ -18,8 +19,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	String nameRule = "[A-Z][a-z]{24}";
 	String empIdRule = "[1-9][0-9]{5}";
 	String dateRule = "^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[012])-((19|2[0-9])[0-9]{2})$";
-	
+
 	private EmployeeDao dao;
+
 	@Override
 	public boolean validateFirstName(String firstName) {
 		return firstName.matches(nameRule);
@@ -37,7 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public boolean validateGender(String gender) {
-		if(gender.equalsIgnoreCase("male")||gender.equalsIgnoreCase("female"))
+		if (gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female"))
 			return true;
 		else {
 			System.out.println("Invalid Input. Enter gender again.");
@@ -49,33 +51,33 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public boolean validateMaritalStatus(String maritalStatus) {
 		List<String> marital = Arrays.asList("Single", "Married", "Divorced", "Separated", "Widowed");
 		int k = 0;
-		for(String flag : marital){
-			if(flag.equalsIgnoreCase(maritalStatus)){
+		for (String flag : marital) {
+			if (flag.equalsIgnoreCase(maritalStatus)) {
 				maritalStatus = flag;
 				k = -1;
 				break;
 			}
-		} 
-		if(k!=-1) {
+		}
+		if (k != -1) {
 			System.out.println("Invalid Input. Enter Again");
 			return false;
-		}else
+		} else
 			return true;
 	}
 
 	@Override
 	public boolean validateDateOfBirth(String sdob) {
-		if(!sdob.matches(dateRule)) {
+		if (!sdob.matches(dateRule)) {
 			System.out.println("Invalid Format. Enter date again.");
 			return false;
 		}
 		return true;
-		
+
 	}
 
 	@Override
 	public boolean validateDateOfJoining(String sdoj) {
-		if(!sdoj.matches(dateRule)) {
+		if (!sdoj.matches(dateRule)) {
 			System.out.println("Invalid Format. Enter date again.");
 			return false;
 		}
@@ -111,6 +113,4 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public List<Employee> fetchAllEmployees() {
 		return dao.fetchAllEmployees();
 	}
-
-
 }
