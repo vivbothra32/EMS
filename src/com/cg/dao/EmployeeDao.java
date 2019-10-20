@@ -9,9 +9,12 @@ import java.util.List;
 import com.cg.beans.Employee;
 
 public interface EmployeeDao {
+	
+	String addQuery="insert into Employees values (seq_emp.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	String seqQuery="select seq_emp.currval from dual";
 	public boolean checkManagerId(String mgrId);
 
-	public Employee saveEmployee(Employee employee);
+	public String saveEmployee(Employee employee);
 
 	public Employee fetchEmployee(String empId);
 

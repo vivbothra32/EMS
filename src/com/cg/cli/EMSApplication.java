@@ -387,7 +387,7 @@ public class EMSApplication {
 				Period period = jdate.until(bdate);
 				if (period.get(ChronoUnit.YEARS) > 0) {
 					System.out
-							.println("DAte of Joining of employee does not conform to the standards. Enter DOJ again.");
+							.println("Date of Joining of employee does not conform to the standards. Enter DOJ again.");
 					sdoj = "";
 					doj = null;
 					jdate = null;
