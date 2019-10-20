@@ -35,28 +35,41 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	public String saveEmployee(Employee employee) {
 		Connection conn =null;
 		
-		conn=getConnection();
-		PreparedStatement stmt=conn.prepareStatement(addQuery);
-		stmt.setString(1,employee.getFirstName());
-		stmt.setString(2,employee.getLastName());
-		//stmt.setString(3, employee.getDateOfBirth());
-		//stmt.setString(4, employee.getDateOfJoining());
-		stmt.setInt(5, employee.getEmpDeptId());
-		stmt.setString(6, employee.getGradeCode());
-		stmt.setString(7, employee.getGradeDescription());
-		stmt.setDouble(8,employee.getBasic());
-		stmt.setString(9, employee.getGender());
-		stmt.setString(10, employee.getMaritalStatus());
-		stmt.setString(11, employee.getHomeAddress());
-		stmt.setString(12, employee.getContactNo());
-		stmt.setString(13, employee.getMgrId());
-		
-		stmt.executeUpdate();
-		ResultSet rs=conn.createStatement().executeQuery(seqQuery);
-		if(rs.next()) 
-			return rs.getString(1);
-		else 
+		try {
+			conn=getConnection();
+			PreparedStatement stmt=conn.prepareStatement(addQuery);
+			stmt.setString(1,employee.getFirstName());
+			stmt.setString(2,employee.getLastName());
+			//stmt.setString(3, employee.getDateOfBirth());
+			//stmt.setString(4, employee.getDateOfJoining());
+			stmt.setInt(5, employee.getEmpDeptId());
+			stmt.setString(6, employee.getGradeCode());
+			stmt.setString(7, employee.getGradeDescription());
+			stmt.setDouble(8,employee.getBasic());
+			stmt.setString(9, employee.getGender());
+			stmt.setString(10, employee.getMaritalStatus());
+			stmt.setString(11, employee.getHomeAddress());
+			stmt.setString(12, employee.getContactNo());
+			stmt.setString(13, employee.getMgrId());
+			
+			stmt.executeUpdate();
+			ResultSet rs=conn.createStatement().executeQuery(seqQuery);
+			if(rs.next()) 
+				return rs.getString(1);
+			else 
+				return null;
+		} catch (SQLException e) {
+			e.printStackTrace();
 			return null;
+		}finally {
+			try {
+				if(conn!=null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
