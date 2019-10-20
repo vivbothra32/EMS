@@ -31,7 +31,7 @@ public interface EmployeeService {
 
 	boolean checkMgrId(String mgrId);
 
-	Employee saveEmployee(Employee employee);
+	String saveEmployee(Employee employee);
 
 	Employee fetchEmployee(String empId);
 

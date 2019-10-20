@@ -518,12 +518,12 @@ public class EMSApplication {
 		employee.setGradeDescription(gradeDescription);
 		employee.setMgrId(mgrId);
 
-		Employee emp = eservice.saveEmployee(employee);
+		String emp = eservice.saveEmployee(employee);
 
 		if (emp == null) {
 			System.out.println("Employee details could not be added in the database.");
 		} else {
-			System.out.println("Employee with id " + emp.getEmpId() + " added.");
+			System.out.println("Employee with id " + emp + " added.");
 		}
 	}
 	/**

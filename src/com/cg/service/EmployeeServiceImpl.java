@@ -93,7 +93,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public Employee saveEmployee(Employee employee) {
+	public String saveEmployee(Employee employee) {
 		return dao.saveEmployee(employee);
 	}
 
