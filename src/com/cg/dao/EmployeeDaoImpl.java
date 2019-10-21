@@ -30,7 +30,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	public boolean checkManagerId(String mgrId) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -43,8 +42,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			PreparedStatement stmt = conn.prepareStatement(addQuery);
 			stmt.setString(1, employee.getFirstName());
 			stmt.setString(2, employee.getLastName());
-			// stmt.setString(3, employee.getDateOfBirth());
-			// stmt.setString(4, employee.getDateOfJoining());
+			java.util.Date dob = new java.util.Date();
+			dob = employee.getDateOfBirth();
+			Date passDOB = new Date(dob.getTime());
+			stmt.setDate(3, passDOB);
+			java.util.Date doj = new java.util.Date();
+			dob = employee.getDateOfJoining();
+			Date passDOJ = new Date(doj.getTime());
+			stmt.setDate(4, passDOJ);
 			stmt.setInt(5, employee.getEmpDeptId());
 			stmt.setString(6, employee.getGradeCode());
 			stmt.setString(7, employee.getGradeDescription());
@@ -78,14 +83,20 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public String modifyEmployee(Employee employee) {
 		Connection conn = null;
-
+		String retrn = null;
 		try {
 			conn = getConnection();
 			PreparedStatement stmt = conn.prepareStatement(updateEmployee);
 			stmt.setString(1, employee.getFirstName());
 			stmt.setString(2, employee.getLastName());
-			stmt.setDate(3, Date.valueOf(employee.getDateOfBirth()));
-			stmt.setDate(4, Date.valueOf(employee.getDateOfJoining()));
+			java.util.Date dob = new java.util.Date();
+			dob = employee.getDateOfBirth();
+			Date passDOB = new Date(dob.getTime());
+			stmt.setDate(3, passDOB);
+			java.util.Date doj = new java.util.Date();
+			dob = employee.getDateOfJoining();
+			Date passDOJ = new Date(doj.getTime());
+			stmt.setDate(4, passDOJ);
 			stmt.setInt(5, employee.getEmpDeptId());
 			stmt.setString(6, employee.getGradeCode());
 			stmt.setString(7, employee.getGradeDescription());
@@ -98,11 +109,13 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			stmt.setString(14, employee.getEmpId());
 
 			stmt.executeUpdate();
-			ResultSet rs = conn.createStatement().executeQuery();
-			if (rs.next())
-				return Integer.toString(rs.getInt(1));
-			else
-				return null;
+			ResultSet rs = (ResultSet) conn.createStatement();
+
+			if (rs.next()) {
+				retrn = Integer.toString(rs.getInt(1));
+				return retrn;
+			} else
+				return retrn;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -113,6 +126,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				e.printStackTrace();
 			}
 		}
+		return retrn;
 	}
 
 	@Override
