@@ -7,6 +7,8 @@ import java.util.List;
  * @version 1.0
  */
 import com.cg.beans.Employee;
+import com.cg.exception.EmployeeNotFoundException;
+import com.cg.exception.WrongIDException;
 
 public interface EmployeeDao {
 	
@@ -31,11 +33,11 @@ public interface EmployeeDao {
 
 	public String saveEmployee(Employee employee);
 
-	public Employee fetchEmployeeFilter(int ID, String FirstName, String LastName, int departmentId, String Grade, String MaritalStatus);
+	public Employee fetchEmployeeFilter(int ID, String FirstName, String LastName, int departmentId, String Grade, String MaritalStatus) throws EmployeeNotFoundException;
 
 	public String modifyEmployee(Employee employee);
 
 	public List<Employee> fetchAllEmployees();
 
-	public Employee fetchEmployee(String id);
+	public Employee fetchEmployee(String id) throws WrongIDException;
 }

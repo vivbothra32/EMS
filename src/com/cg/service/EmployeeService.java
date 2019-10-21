@@ -11,6 +11,8 @@ import java.util.List;
 import com.cg.beans.Department;
 import com.cg.beans.Employee;
 import com.cg.beans.Grade;
+import com.cg.exception.EmployeeNotFoundException;
+import com.cg.exception.WrongIDException;
 
 public interface EmployeeService {
 
@@ -34,9 +36,9 @@ public interface EmployeeService {
 
 	String saveEmployee(Employee employee);
 
-	Employee fetchEmployeeFilter(int ID, String FirstName, String LastName, int departmentId, String Grade, String MaritalStatus);
+	Employee fetchEmployeeFilter(int ID, String FirstName, String LastName, int departmentId, String Grade, String MaritalStatus) throws EmployeeNotFoundException;
 
-	Employee fetchEmployee(String empId);
+	Employee fetchEmployee(String empId) throws WrongIDException;
 	
 	String modifyEmployee(Employee employee);
 

@@ -15,6 +15,8 @@ import java.util.List;
  * @version 1.0
  */
 import com.cg.beans.Employee;
+import com.cg.exception.EmployeeNotFoundException;
+import com.cg.exception.WrongIDException;
 
 import oracle.jdbc.driver.OracleDriver;
 
@@ -157,7 +159,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public Employee fetchEmployeeFilter(int ID, String FirstName, String LastName, int departmentId, String Grade,
-			String MaritalStatus) {
+			String MaritalStatus) throws EmployeeNotFoundException {
 		Connection conn = null;
 		Employee e = null;
 
@@ -196,10 +198,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				e.setContactNo(rs.getString(13));
 				e.setMgrId(rs.getString(14));
 			} else
-				throw new Exception("some exception");
+				throw new EmployeeNotFoundException("Can't find this Employee");
 			return e;
 		} catch (SQLException e1) {
-			throw new Exception("some exception");
+			throw new EmployeeNotFoundException("Employee Not Found");
 		} finally {
 			try {
 				if (conn != null)
@@ -211,7 +213,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
-	public Employee fetchEmployee(String id) {
+	public Employee fetchEmployee(String id) throws WrongIDException {
 		Connection conn = null;
 		Employee e = null;
 
@@ -237,10 +239,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				e.setContactNo(rs.getString(13));
 				e.setMgrId(rs.getString(14));
 			} else
-				throw new SomeInvalidException("Employee does not exist.");
+				throw new WrongIDException("Employee does not exist.");
 			return e;
 		} catch (SQLException e1) {
-			throw new SomeInvalidException(e1.getMessage());
+			throw new WrongIDException(e1.getMessage());
 		} finally {
 			try {
 				if (conn != null)

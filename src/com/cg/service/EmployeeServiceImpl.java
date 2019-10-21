@@ -14,6 +14,8 @@ import com.cg.beans.Employee;
 import com.cg.beans.Grade;
 import com.cg.dao.EmployeeDao;
 import com.cg.dao.EmployeeDaoImpl;
+import com.cg.exception.EmployeeNotFoundException;
+import com.cg.exception.WrongIDException;
 
 public class EmployeeServiceImpl implements EmployeeService {
 	String nameRule = "[A-Z][a-z]{24}";
@@ -111,12 +113,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public Employee fetchEmployeeFilter(int Id, String FirstName, String LastName, int departmentId, String Grade,
-			String MaritalStatus) {
+			String MaritalStatus) throws EmployeeNotFoundException {
 		return dao.fetchEmployeeFilter(Id, FirstName, LastName, departmentId, Grade, MaritalStatus);
 	}
 
 	@Override
-	public Employee fetchEmployee(String id) {
+	public Employee fetchEmployee(String id) throws WrongIDException {
 		return dao.fetchEmployee(id);
 	}
 }
