@@ -92,12 +92,10 @@ public class EMSApplication {
 		System.out.print("Enter your Password : ");
 		password = scanner.next();
 		
-		//Checking the user type entered. Shopuld be either Admin/Employee
+		//Checking the user type entered. Should be either Admin/Employee
 		while (true) {
 			System.out.print("Enter user type : Admin/Employee ");
 			userType = scanner.next();
-			
-			// ignore case will be better here cause I would like to type like EmPlOyEe Mah lyf mah rulezz :p
 			
 			if (userType.equalsIgnoreCase("Admin") || userType.equalsIgnoreCase("Employee")) {
 				break;
@@ -130,8 +128,43 @@ public class EMSApplication {
 	}
 
 	private static void employeeLogin(User flag) {
+		int choice;
+		//if(flag.getUserType().equalsIgnoreCase(""))
+		do {
+			System.out.println("==============================================");
+			System.out.println("Enter 1 to Search Employee");
+			System.out.println("Enter 2 to Apply For Leave");
+			System.out.println("Enter 3 to Approve Leave");
+			System.out.println("Enter 0 to exit.");
+			System.out.println("==============================================");
+			choice = scanner.nextInt();
+			switch (choice) {
+			case 1:
+				searchEmployee();	//Control shifts to addEmployee function on choosing 1.
+				break;
+			case 2:
+				leaveApplication();	//Control shifts to modifyEmployee function on choosing 2.
+				break;
+			case 3:
+				leaveApproval();
+				break;
+			case 0:
+				System.exit(0);	//Exiting the control when ) is entered.
+			default:
+				System.out.println("Invalid choice entered"); //Default message when none of 0 - 3 is entered
+			}
+		} while (true);
+	}
+	private static void leaveApproval() {
 		// TODO Auto-generated method stub
-
+		
+	}
+	private static void leaveApplication() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void searchEmployee() {
+		 
 	}
 	/**
 	 * @description static function adminLogin. Provides the functions specific to Admin type user. 
