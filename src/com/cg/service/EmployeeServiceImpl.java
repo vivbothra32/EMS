@@ -95,13 +95,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public Employee saveEmployee(Employee employee) {
+	public String saveEmployee(Employee employee) {
 		return dao.saveEmployee(employee);
-	}
-
-	@Override
-	public Employee fetchEmployee(String empId) {
-		return dao.fetchEmployee(empId);
 	}
 
 	@Override
@@ -112,5 +107,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public List<Employee> fetchAllEmployees() {
 		return dao.fetchAllEmployees();
+	}
+
+	@Override
+	public Employee fetchEmployeeFilter(int Id, String FirstName, String LastName, int departmentId, String Grade,
+			String MaritalStatus) {
+		return dao.fetchEmployeeFilter(Id, FirstName, LastName, departmentId, Grade, MaritalStatus);
+	}
+
+	@Override
+	public Employee fetchEmployee(String id) {
+		return dao.fetchEmployee(id);
 	}
 }

@@ -136,7 +136,8 @@ public class EMSApplication {
 
 	private static void employeeLogin(User flag) {
 		// TODO Auto-generated method stub
-
+		eservice.fetchEmployeeFilter(ID, First Name, Last Name, department, Grade, Marital Status);
+		
 	}
 
 	/**
@@ -528,12 +529,12 @@ public class EMSApplication {
 		employee.setGradeDescription(gradeDescription);
 		employee.setMgrId(mgrId);
 
-		Employee emp = eservice.saveEmployee(employee);
+		String emp = eservice.saveEmployee(employee);
 
 		if (emp == null) {
 			System.out.println("Employee details could not be added in the database.");
 		} else {
-			System.out.println("Employee with id " + emp.getEmpId() + " added.");
+			System.out.println("Employee with id " + employee.getEmpId() + " added.");
 		}
 	}
 

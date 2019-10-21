@@ -32,10 +32,12 @@ public interface EmployeeService {
 
 	boolean checkMgrId(String mgrId);
 
-	Employee saveEmployee(Employee employee);
+	String saveEmployee(Employee employee);
+
+	Employee fetchEmployeeFilter(int ID, String FirstName, String LastName, int departmentId, String Grade, String MaritalStatus);
 
 	Employee fetchEmployee(String empId);
-
+	
 	String modifyEmployee(Employee employee);
 
 	List<Employee> fetchAllEmployees();
