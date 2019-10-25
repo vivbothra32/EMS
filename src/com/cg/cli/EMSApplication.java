@@ -32,7 +32,7 @@ import com.cg.service.UserServiceimpl;
 
 public class EMSApplication {
 	/**
-	 * Static objects defined
+	 * Static objects defined.
 	 */
 	private static Scanner scanner;
 	private static UserService uservice;
