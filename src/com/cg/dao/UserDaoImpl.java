@@ -20,7 +20,7 @@ public class UserDaoImpl implements UserDao {
 	private Connection getConnection() throws SQLException {
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		DriverManager.registerDriver(new OracleDriver());
-		Connection conn = DriverManager.getConnection(url, "vivek", "oracle");
+		Connection conn = DriverManager.getConnection(url, "anurag", "oracle");
 		return conn;
 
 	}
@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User validateLogin(User user) {
 
-		String sql = "select *  from user_master where userid=?  and username = ? and password=? and usertype = ?";
+		String sql = "select *  from user_master where userid=?  and username = ? and userpassword=? and usertype = ?";
 		Connection conn = null;
 		User u = null;
 		try {

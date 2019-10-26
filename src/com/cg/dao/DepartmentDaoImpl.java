@@ -11,8 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.cg.beans.Department;
-import com.cg.beans.Grade;
-import com.cg.beans.User;
 
 import oracle.jdbc.driver.OracleDriver;
 
@@ -20,7 +18,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	private Connection getConnection() throws SQLException {
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		DriverManager.registerDriver(new OracleDriver());
-		Connection conn = DriverManager.getConnection(url, "vivek", "oracle");
+		Connection conn = DriverManager.getConnection(url, "anurag", "oracle");
 		return conn;
 
 	}

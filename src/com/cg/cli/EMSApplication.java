@@ -21,6 +21,7 @@ import com.cg.beans.Department;
 import com.cg.beans.Employee;
 import com.cg.beans.Grade;
 import com.cg.beans.User;
+import com.cg.exception.WrongIDException;
 import com.cg.service.DepartmentService;
 import com.cg.service.DepartmentServiceImpl;
 import com.cg.service.EmployeeService;
@@ -53,9 +54,10 @@ public class EMSApplication {
 
 	/**
 	 * @description main method of Employee Maintenance System Client Interface
-	 * @author Group 2.
+	 * @author  group  2.
+	 * @throws WrongIDException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws WrongIDException {
 		int userTypeChoice;
 		System.out.println("WELCOME TO EMPLOYEE MAINTENANCE SYSTEM.");
 		do {
@@ -79,9 +81,10 @@ public class EMSApplication {
 
 	/**
 	 * @description performs the sign in operation when user chooses option 1.
-	 * @author Vivek
+	 * @author  group  2
+	 * @throws WrongIDException 
 	 */
-	public static void signIn() {
+	public static void signIn() throws WrongIDException {
 		System.out.println("==============================================");
 		System.out.println("Sign In: ");
 		User user = new User();
@@ -136,16 +139,17 @@ public class EMSApplication {
 
 	private static void employeeLogin(User flag) {
 		// TODO Auto-generated method stub
-		eservice.fetchEmployeeFilter(ID, First Name, Last Name, department, Grade, Marital Status);
+		eservice.fetchEmployeeFilter(id, firstName, lastName, department, grade, maritalStatus);
 		
 	}
 
 	/**
 	 * @description static function adminLogin. Provides the functions specific to
 	 *              Admin type user.
-	 * @author Vivek
+	 * @author  group  2
+	 * @throws WrongIDException 
 	 */
-	private static void adminLogin(User flag) {
+	private static void adminLogin(User flag) throws WrongIDException {
 		int choice;
 		do {
 			System.out.println("==============================================");
@@ -176,9 +180,10 @@ public class EMSApplication {
 	/**
 	 * @description 1st privilege of Admin type user. Function to modify the
 	 *              employee details.
-	 * @author Vivek
+	 * @author group  2
+	 * @throws WrongIDException 
 	 */
-	private static void modifyEmployee() {
+	private static void modifyEmployee() throws WrongIDException {
 		System.out.println("MODIFYING EXISTING EMPLOYEE DETAILS");
 		String empId = "", firstName = "", lastName = "", maritalStatus = "", homeAddress = "", contactNo = "",
 				gradeDescription = "", gradeCode = "";

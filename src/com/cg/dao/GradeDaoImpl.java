@@ -21,7 +21,7 @@ public class GradeDaoImpl implements GradeDao {
 	private Connection getConnection() throws SQLException {
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		DriverManager.registerDriver(new OracleDriver());
-		Connection conn = DriverManager.getConnection(url, "vivek", "oracle");
+		Connection conn = DriverManager.getConnection(url, "anurag", "oracle");
 		return conn;
 
 	}
